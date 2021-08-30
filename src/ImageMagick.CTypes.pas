@@ -23,6 +23,54 @@ unit ImageMagick.CTypes;
 {$endif}
 
 interface
+{$IFDEF LINUX}
+type
+  cint8                  = shortint;           pcint8                 = ^cint8;
+  cuint8                 = byte;               pcuint8                = ^cuint8;
+  cchar                  = cint8;              pcchar                 = ^cchar;
+  cschar                 = cint8;              pcschar                = ^cschar;
+  cuchar                 = cuint8;             pcuchar                = ^cuchar;
+
+  cint16                 = smallint;           pcint16                = ^cint16;
+  cuint16                = word;               pcuint16               = ^cuint16;
+  cshort                 = cint16;             pcshort                = ^cshort;
+  csshort                = cint16;             pcsshort               = ^csshort;
+  cushort                = cuint16;            pcushort               = ^cushort;
+
+  cint32                 = longint;            pcint32                = ^cint32;
+  cuint32                = longword;           pcuint32               = ^cuint32;
+  cint                   = cint32;             pcint                  = ^cint;              { minimum range is : 32-bit    }
+  csint                  = cint32;             pcsint                 = ^csint;             { minimum range is : 32-bit    }
+  cuint                  = cuint32;            pcuint                 = ^cuint;             { minimum range is : 32-bit    }
+  csigned                = cint;               pcsigned               = ^csigned;
+  cunsigned              = cuint;              pcunsigned             = ^cunsigned;
+
+  cint64                 = int64;              pcint64                = ^cint64;
+//  cuint64                = qword;              pcuint64               = ^cuint64;
+  clonglong              = cint64;             pclonglong             = ^clonglong;
+  cslonglong             = cint64;             pcslonglong            = ^cslonglong;
+//  culonglong             = cuint64;            pculonglong            = ^culonglong;
+
+  cbool                  = longbool;           pcbool                 = ^cbool;
+
+{$ifdef cpu64}
+  clong                  = int64;              pclong                 = ^clong;
+  cslong                 = int64;              pcslong                = ^cslong;
+  culong                 = qword;              pculong                = ^culong;
+{$else}
+  clong                  = longint;            pclong                 = ^clong;
+  cslong                 = longint;            pcslong                = ^cslong;
+  culong                 = cardinal;           pculong                = ^culong;
+{$endif}
+
+{$ifndef FPUNONE}
+  cfloat                 = single;             pcfloat                = ^cfloat;
+  cdouble                = double;             pcdouble               = ^cdouble;
+  clongdouble            = extended;           pclongdouble           = ^clongdouble;
+{$endif}
+  csize_t                = int64;            pcsize_t               = ^clong;
+
+{$ENDIF}
 
 {$IFDEF MSWINDOWS}
 {$ifdef unix}
