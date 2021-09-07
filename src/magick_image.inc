@@ -228,6 +228,7 @@ MagickWriteImage: function(wand: PMagickWand; const filename: PAnsiChar): Magick
 MagickWriteImages: function(wand: PMagickWand; const filename: PAnsiChar; const adjoin: MagickBooleanType ): MagickBooleanType; cdecl;
 //  MagickWriteImagesFile(MagickWand *,FILE *);
 
+MagickResetImagePage: function(wand: PMagickWand; const page: PAnsiChar): MagickBooleanType; cdecl;
 
 MagickSetImageProgressMonitor: function(wand: PMagickWand; const progress_monitor: MagickProgressMonitor; client_data: Pointer): MagickProgressMonitor; cdecl;
 

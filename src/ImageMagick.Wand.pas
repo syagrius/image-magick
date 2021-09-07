@@ -296,6 +296,7 @@ begin
       MagickUnsharpMaskImageChannel := GetProcAddress(FModule, 'MagickUnsharpMaskImageChannel');
       MagickUnsharpMaskImage := GetProcAddress(FModule, 'MagickUnsharpMaskImage');
       MagickTrimImage := GetProcAddress(FModule, 'MagickTrimImage');
+      MagickResetImagePage := GetProcAddress(FModule, 'MagickResetImagePage');
       MagickThresholdImageChannel := GetProcAddress(FModule, 'MagickThresholdImageChannel');
       MagickThresholdImage := GetProcAddress(FModule, 'MagickThresholdImage');
       MagickTintImage := GetProcAddress(FModule, 'MagickTintImage');
