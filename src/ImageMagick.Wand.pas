@@ -193,6 +193,7 @@ begin
       MagickDisplayImages := GetProcAddress(FModule, 'MagickDisplayImages');
       MagickDisplayImage := GetProcAddress(FModule, 'MagickDisplayImage');
       MagickDespeckleImage := GetProcAddress(FModule, 'MagickDespeckleImage');
+      MagickDeskewImage := GetProcAddress(FModule, 'MagickDeskewImage');
       MagickCycleColormapImage := GetProcAddress(FModule, 'MagickCycleColormapImage');
       MagickCropImage := GetProcAddress(FModule, 'MagickCropImage');
       MagickConvolveImageChannel := GetProcAddress(FModule, 'MagickConvolveImageChannel');

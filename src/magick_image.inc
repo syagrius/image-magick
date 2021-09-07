@@ -78,6 +78,7 @@ MagickConvolveImageChannel: function(wand: PMagickWand; const channel: ChannelTy
 MagickCropImage: function(wand: PMagickWand; const width, height: culong; const x, y: clong): MagickBooleanType; cdecl;
 MagickCycleColormapImage: function(wand: PMagickWand; const displace: clong): MagickBooleanType; cdecl;
 MagickDespeckleImage: function(wand: PMagickWand): MagickBooleanType; cdecl;
+MagickDeskewImage: function(wand: PMagickWand; const threshold: double): MagickBooleanType; cdecl;
 MagickDisplayImage: function(wand: PMagickWand; const server_name: PAnsiChar): MagickBooleanType; cdecl;
 MagickDisplayImages: function(wand: PMagickWand; const server_name: PAnsiChar): MagickBooleanType; cdecl;
 MagickDrawImage: function(wand: PMagickWand; const drawing_wand: PDrawingWand): MagickBooleanType; cdecl;
