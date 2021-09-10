@@ -35,8 +35,12 @@ uses
   { Delphi }
   System.SysUtils,
 
+  ccInfinity.Console,
+
   { ImageMagick }
   ImageMagick.CTypes;
+
+
 
 {$z4}
 
@@ -142,38 +146,55 @@ uses
   { Windows }
   Winapi.Windows,
 {$ENDIF}
+  System.SyncObjs,
 
   { ImageMagick }
   ImageMagick.Wand;
 
 var
-  FModule: HMODULE;
+  FModule  : HMODULE;
+  FLock    : TCriticalSection;
 
+// ----------------------------------------------------------------------------------
 function TryInitializeImageMagick: Boolean;
 begin
-  if not GInitializedImageMagick then
-  begin
-    FModule := LoadLibrary(PChar(MagickExport));
-    Result := FModule <> 0;
-    if Result then
+  FLock.Acquire;
+  try
+    if not GInitializedImageMagick then
     begin
-      GetAuthenticPixels := GetProcAddress(FModule, 'GetAuthenticPixels');
-      Result := TryInitializeImageMagickWand;
-      GInitializedImageMagick := True;
-    end;
-  end
-  else
-    Result := True;
+      FModule := LoadLibrary(PChar(MagickExport));
+      Result := FModule <> 0;
+      if Result then
+      begin
+        GetAuthenticPixels := GetProcAddress(FModule, 'GetAuthenticPixels');
+        Result := TryInitializeImageMagickWand;
+        GInitializedImageMagick := True;
+      end;
+    end
+    else
+      Result := True;
+  finally
+    FLock.Release;
+  end;
 end;
 
+// ----------------------------------------------------------------------------------
 procedure FinalizeImageMagick;
 begin
+  FLock.Acquire;
+  try
   if GInitializedImageMagick then
   begin
     FinalizeImageMagickWand;
     FreeLibrary(FModule);
     GInitializedImageMagick := False;
   end;
+  finally
+    FLock.Release;
+  end;
 end;
 
+// ----------------------------------------------------------------------------------
+initialization
+  FLock := TCriticalSection.Create();
 end.
