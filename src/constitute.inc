@@ -22,8 +22,8 @@ type
   CharPixel,
   DoublePixel,
   FloatPixel,
-  IntegerPixel,
   LongPixel,
+  LongLongPixel,
   QuantumPixel,
   ShortPixel
  );

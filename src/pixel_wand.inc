@@ -28,7 +28,7 @@ type
 
     exception: ExceptionInfo;
 
-    pixel: MagickPixelPacket;
+    pixel: PixelInfo;
 
     count: culong;
 
@@ -36,7 +36,7 @@ type
 
     signature: culong;
   end;
-  
+
   PPixelWand = ^PixelWand;
   
   PPPixelWand = ^PPixelWand;
@@ -99,7 +99,7 @@ PixelSetGreenQuantum: procedure(wand: PPixelWand; const opacity: Quantum); cdecl
 PixelSetIndex: procedure(wand: PPixelWand; const index: IndexPacket); cdecl;
 PixelSetMagenta: procedure(wand: PPixelWand; const opacity: Double); cdecl;
 PixelSetMagentaQuantum: procedure(wand: PPixelWand; const opacity: Quantum); cdecl;
-PixelSetMagickColor: procedure(wand: PPixelWand; const color: PMagickPixelPacket); cdecl; // Added after 6.2
+//PixelSetMagickColor: procedure(wand: PPixelWand; const color: PMagickPixelPacket); cdecl; // Added after 6.2
 PixelSetOpacity: procedure(wand: PPixelWand; const opacity: Double); cdecl;
 PixelSetOpacityQuantum: procedure(wand: PPixelWand; const opacity: Quantum); cdecl;
 PixelSetQuantumColor: procedure(wand: PPixelWand; const color: PPixelPacket); cdecl;
@@ -109,5 +109,5 @@ PixelSetYellow: procedure(wand: PPixelWand; const opacity: Double); cdecl;
 PixelSetYellowQuantum: procedure(wand: PPixelWand; const opacity: Quantum); cdecl;
 
 // Considered a private method in newer versions (after 6.2)
-PixelGetMagickColor: procedure(const wand: PPixelWand; packet: PMagickPixelPacket); cdecl;
+//PixelGetMagickColor: procedure(const wand: PPixelWand; packet: PMagickPixelPacket); cdecl;
 

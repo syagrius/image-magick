@@ -24,19 +24,21 @@ type
 
     exception: ExceptionInfo;
 
-    view: PViewInfo;
+    view: CacheView;
 
     region: RectangleInfo;
 
+    active: MagickBooleanType;
+
     y: cint;
 
-    pixel_wand: PPPixelWand;
+    pixel_wands: PPPixelWand;
 
     debug: MagickBooleanType;
 
     signature: culong;
   end;
-  
+
   PPixelIterator = ^PixelIterator;
 
 var

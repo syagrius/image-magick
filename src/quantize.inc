@@ -17,14 +17,22 @@
 }
 
 type
+ DitherMethod = (
+  UndefinedDitherMethod,
+  NoDitherMethod,
+  RiemersmaDitherMethod,
+  FloydSteinbergDitherMethod
+ );
+
+type
   QuantizeInfo = record
     number_colors: culong;
 
     tree_depth: culong; 
 
-    dither: MagickBooleanType;
-
     colorspace: ColorspaceType;
+
+    dither_method: DitherMethod;
 
     measure_error: MagickBooleanType;
 

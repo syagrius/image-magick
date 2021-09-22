@@ -44,6 +44,13 @@ type
  );
 
 type
+ DirectionType = (
+  UndefinedDirection,
+  RightToLeftDirection,
+  LeftToRightDirection
+);
+
+type
  FillRule = (
   UndefinedRule,
 //#undef EvenOddRule
@@ -87,21 +94,21 @@ type
 type
  PrimitiveType = (
   UndefinedPrimitive,
-  PointPrimitive,
+  AlphaPrimitive,
+  ArcPrimitive,
+  BezierPrimitive,
+  CirclePrimitive,
+  ColorPrimitive,
+  EllipsePrimitive,
+  ImagePrimitive,
   LinePrimitive,
+  PathPrimitive,
+  PointPrimitive,
+  PolygonPrimitive,
+  PolylinePrimitive,
   RectanglePrimitive,
   RoundRectanglePrimitive,
-  ArcPrimitive,
-  EllipsePrimitive,
-  CirclePrimitive,
-  PolylinePrimitive,
-  PolygonPrimitive,
-  BezierPrimitive,
-  ColorPrimitive,
-  MattePrimitive,
-  TextPrimitive,
-  ImagePrimitive,
-  PathPrimitive
+  TextPrimitive
  );
 
 type
@@ -119,67 +126,68 @@ type
  );
 
 type
-  GradientInfo = record
-    type_: GradientType;
+ ComplianceType = (
+  UndefinedCompliance,
+  NoCompliance = $0000,
+  CSSCompliance = $0001,
+  SVGCompliance = $0001,
+  X11Compliance = $0002,
+  XPMCompliance = $0004,
+  MVGCompliance = $0008,
+  AllCompliance = $7fffffff
+ );
 
-    color: PixelPacket;
-
-    stop: SegmentInfo;
-
-    length: culong;
-
-    spread: SpreadMethod;
-
-    debug: MagickBooleanType;
-
-    signature: culong;
-
-    previous, next: Pointer;
-{  struct _GradientInfo
-    *previous,
-    *next;}
+ type
+  StopInfo = record
+    color: PixelInfo;
+    offfset: double;
   end;
+  PStopInfo = ^StopInfo;
 
 type
+  GradientInfo = record
+    type_: GradientType;
+    bounding_box: RectangleInfo;
+    gradient_vector: SegmentInfo;
+    stops: PStopInfo;
+    number_stops: culong;
+    spread: SpreadMethod;
+    debug: MagickBooleanType;
+    center, radii: PointInfo;
+    radius, angle: double;
+    signature: culong;
+  end;
+
+
+type
+  PElementReference = ^ElementReference;
   ElementReference = record
     id: PAnsiChar;
-
     type_: ReferenceType;
-
     gradient: GradientInfo;
-
+    previous, next: PElementReference;
     signature: culong;
-
-    previous, next: Pointer;
-{  struct _ElementReference
-    *previous,
-    *next;}
   end;
 
 type
   DrawInfo = record
-    primitive,
-    geometry: PAnsiChar;
+    primitive, geometry: PAnsiChar;
 
     viewbox: RectangleInfo;
 
     affine: AffineMatrix;
 
-    gravity: GravityType;
+//    gravity: GravityType;
 
-    fill,
-    stroke: PixelPacket;
+    fill, stroke, undercolor, border_color: PixelInfo;
+
+    fill_pattern, stroke_pattern: PImage;
 
     stroke_width: double;
 
     gradient: GradientInfo;
 
-    fill_pattern,
-    tile,
-    stroke_pattern: PImage;
-
-    stroke_antialias,
-    text_antialias: MagickBooleanType;
+    stroke_antialias, text_antialias: MagickBooleanType;
 
     fill_rule: FillRule;
 
@@ -195,20 +203,16 @@ type
 
     compose: CompositeOperator;
 
-    text: PAnsiChar;
+    text, font, metrics, family: PAnsiChar;
 
     face: culong;
-
-    font,
-    metrics,
-    family: PAnsiChar;
 
     style: StyleType;
 
     stretch: StretchType;
 
     weight: culong;
-    
+
     encoding: PAnsiChar;
 
     pointsize: double;
@@ -217,40 +221,50 @@ type
 
     align: AlignType;
 
-    undercolor,
-    border_color: PixelPacket;
+    gravity: GravityType;
 
     server_name: PAnsiChar;
 
     dash_pattern: Pdouble;
 
-    clip_path: PAnsiChar;
+    clip_mask: PAnsiChar;
 
     bounds: SegmentInfo;
 
     clip_units: ClipPathUnits;
 
-    opacity: Quantum;
+    alpha: Quantum;
 
     render: MagickBooleanType;
 
     element_reference: ElementReference;
 
+    kerning, interword_spacing, interline_spacing: double;
+
+    direction: DirectionType;
+
     debug: MagickBooleanType;
 
     signature: culong;
+
+    fill_alpha, stroke_alpha: double;
+
+    clip_path: MagickBooleanType;
+
+    clipping_mask: PImage;
+
+    compliance: ComplianceType;
+
+    composite_mask: PImage;
+
+    id: PAnsiChar;
+
   end;
-  
+
   PDrawInfo = ^DrawInfo;
-  
+
   PPDrawInfo = ^PDrawInfo;
 
-type
-  PointInfo = record
-    x, y: double;
-  end;
-  
-  PPointInfo = ^PointInfo;
 
 type
   PrimitiveInfo = record
@@ -263,6 +277,8 @@ type
     method: PaintMethod;
 
     text: PAnsiChar;
+
+    closed_subpath: MagickBooleanType;
   end;
 
 type
@@ -278,6 +294,8 @@ type
     underline_thickness: double;
 
     bounds: SegmentInfo;
+
+    origin: PointInfo;
   end;
 
 {extern MagickExport DrawInfo

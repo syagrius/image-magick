@@ -37,7 +37,8 @@ type
   NormalStyle,
   ItalicStyle,
   ObliqueStyle,
-  AnyStyle
+  AnyStyle,
+  BoldStyle
  );
 
 type
@@ -62,11 +63,6 @@ type
     glyphs: PAnsiChar;
 
     stealth: MagickBooleanType;
-
-    previous, next: Pointer;
-{  struct _TypeInfo
-    *previous,
-    *next;  /* deprecated, use GetTypeInfoList() */}
 
     signature: culong;
   end;

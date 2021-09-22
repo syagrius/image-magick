@@ -16,16 +16,60 @@
   ImageMagick Cache View Methods.
 }
 
+
 type
-  ViewInfo = record
+ VirtualPixelMethod = (
+  UndefinedVirtualPixelMethod,
+  BackgroundVirtualPixelMethod,
+  DitherVirtualPixelMethod,
+  EdgeVirtualPixelMethod,
+  MirrorVirtualPixelMethod,
+  RandomVirtualPixelMethod,
+  TileVirtualPixelMethod,
+  TransparentVirtualPixelMethod,
+  MaskVirtualPixelMethod,
+  BlackVirtualPixelMethod,
+  GrayVirtualPixelMethod,
+  WhiteVirtualPixelMethod,
+  HorizontalTileVirtualPixelMethod,
+  VerticalTileVirtualPixelMethod,
+  HorizontalTileEdgeVirtualPixelMethod,
+  VerticalTileEdgeVirtualPixelMethod,
+  CheckerTileVirtualPixelMethod
+  );
+
+type
+  PNexusInfo = ^NexusInfo;
+  PPNexusInfo = ^PNexusInfo;
+
+  NexusInfo = record
+    mapped: MagickBooleanType;
+    region: RectangleInfo;
+    length: MagickSizeType;
+    cache, pixels: ^Quantum;
+    authentic_pixel_cache: MagickBooleanType;
+    metacontent: Pointer;
+    signature: culong;
+    virtual_nexus: PNexusInfo;
+  end;
+
+
+type
+  CacheView = record
     image: PImage;
 
-    id: culong;
+    virtual_pixel_method: VirtualPixelMethod;
+
+    number_threads: culong;
+
+    nexus_info: PPNexusInfo;
+
+    debug: MagickBooleanType;
 
     signature: culong;
   end;
   
-  PViewInfo = ^ViewInfo;
+  PCacheView = ^CacheView;
 
 {extern MagickExport const PixelPacket
   *AcquireCacheView(const ViewInfo *,const long,const long,const unsigned long,

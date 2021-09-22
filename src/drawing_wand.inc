@@ -57,9 +57,9 @@ type
     mvg: PAnsiChar;               // MVG data
 
     mvg_alloc,                // total allocated memory
-//    mvg_length: size_t;       // total MVG length
+    mvg_length: culong;       // total MVG length
 
-    mvg_width: culong;      // current line width 
+    mvg_width: culong;      // current line width
 
     { Pattern support }
     
@@ -67,7 +67,7 @@ type
 
     pattern_bounds: RectangleInfo;
 
-//    pattern_offset: size_t;
+    pattern_offset: culong;
 
     { Graphic wand }
     

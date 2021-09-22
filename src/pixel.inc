@@ -22,9 +22,16 @@ type
   QuantumType = (
   UndefinedQuantum,
   AlphaQuantum,
+  BGRAQuantum,
+  BGROQuantum,
+  BGRQuantum,
   BlackQuantum,
   BlueQuantum,
+  CbYCrAQuantum,
+  CbYCrQuantum,
+  CbYCrYQuantum,
   CMYKAQuantum,
+  CMYKOQuantum,
   CMYKQuantum,
   CyanQuantum,
   GrayAlphaQuantum,
@@ -37,14 +44,13 @@ type
   RedQuantum,
   RGBAQuantum,
   RGBOQuantum,
+  RGBPadQuantum,
   RGBQuantum,
-  YellowQuantum,
-  GrayPadQuantum,
-  RGBPadQuantum
+  YellowQuantum
  );
 
 type
-  LongPixelPacket = record
+  LongPixelPacketXX = record
     red,
     green,
     blue,
@@ -53,7 +59,7 @@ type
   end;
 
 type
-  MagickPixelPacket = record
+  MagickPixelPacketXX = record
     storage_class: ClassType; // Added after 6.2
 
     colorspace: ColorspaceType;
@@ -71,7 +77,7 @@ type
     index: MagickRealType;
   end;
 
-  PMagickPixelPacket = ^MagickPixelPacket;
+  PMagickPixelPacketXX = ^MagickPixelPacketXX;
 
 {extern MagickExport MagickBooleanType
   ExportImagePixels(const Image *,const long,const long,const unsigned long,

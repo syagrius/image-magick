@@ -20,12 +20,19 @@
 
 type
  MetricType = (
-  UndefinedMetric,
+  UndefinedErrorMetric,
+  AbsoluteErrorMetric,
+  FuzzErrorMetric,
   MeanAbsoluteErrorMetric,
+  MeanErrorPerPixelErrorMetric,
   MeanSquaredErrorMetric,
+  NormalizedCrossCorrelationErrorMetric,
   PeakAbsoluteErrorMetric,
-  PeakSignalToNoiseRatioMetric,
-  RootMeanSquaredErrorMetric
+  PeakSignalToNoiseRatioErrorMetric,
+  PerceptualHashErrorMetric,
+  RootMeanSquaredErrorMetric,
+  StructuralSimilarityErrorMetric,
+  StructuralDissimilarityErrorMetric
  );
 
 {extern MagickExport Image

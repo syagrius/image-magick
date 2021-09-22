@@ -355,7 +355,7 @@ begin
       MagickResampleImage := GetProcAddress(FModule, 'MagickResampleImage');
       MagickRemoveImage := GetProcAddress(FModule, 'MagickRemoveImage');
       MagickReduceNoiseImage := GetProcAddress(FModule, 'MagickReduceNoiseImage');
-      PixelGetMagickColor := GetProcAddress(FModule, 'PixelGetMagickColor');
+//      PixelGetMagickColor := GetProcAddress(FModule, 'PixelGetMagickColor');
       PixelSetYellowQuantum := GetProcAddress(FModule, 'PixelSetYellowQuantum');
       PixelSetYellow := GetProcAddress(FModule, 'PixelSetYellow');
       PixelSetRedQuantum := GetProcAddress(FModule, 'PixelSetRedQuantum');
@@ -363,7 +363,7 @@ begin
       PixelSetQuantumColor := GetProcAddress(FModule, 'PixelSetQuantumColor');
       PixelSetOpacityQuantum := GetProcAddress(FModule, 'PixelSetOpacityQuantum');
       PixelSetOpacity := GetProcAddress(FModule, 'PixelSetOpacity');
-      PixelSetMagickColor := GetProcAddress(FModule, 'PixelSetMagickColor');
+//      PixelSetMagickColor := GetProcAddress(FModule, 'PixelSetMagickColor');
       PixelSetMagentaQuantum := GetProcAddress(FModule, 'PixelSetMagentaQuantum');
       PixelSetMagenta := GetProcAddress(FModule, 'PixelSetMagenta');
       PixelSetIndex := GetProcAddress(FModule, 'PixelSetIndex');

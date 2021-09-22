@@ -93,85 +93,130 @@ type
 
 type
  ColorspaceType = (
-  UndefinedColorspace,
-  RGBColorspace,
-  GRAYColorspace,
-  TransparentColorspace,
-  OHTAColorspace,
-  LABColorspace,
-  XYZColorspace,
-  YCbCrColorspace,
-  YCCColorspace,
-  YIQColorspace,
-  YPbPrColorspace,
-  YUVColorspace,
-  CMYKColorspace,
-  sRGBColorspace,
-  HSBColorspace,
-  HSLColorspace,
-  HWBColorspace,
-  Rec601LumaColorspace,
-  Rec709LumaColorspace,
-  LogColorspace
- );
+   UndefinedColorspace,
+   CMYColorspace,           // negated linear RGB colorspace */
+   CMYKColorspace,          // CMY with Black separation */
+   GRAYColorspace,          // Single Channel greyscale (non-linear) image */
+   HCLColorspace,
+   HCLpColorspace,
+   HSBColorspace,
+   HSIColorspace,
+   HSLColorspace,
+   HSVColorspace,           // alias for HSB */
+   HWBColorspace,
+   LabColorspace,
+   LCHColorspace,           // alias for LCHuv */
+   LCHabColorspace,         // Cylindrical (Polar) Lab */
+   LCHuvColorspace,         // Cylindrical (Polar) Luv */
+   LogColorspace,
+   LMSColorspace,
+   LuvColorspace,
+   OHTAColorspace,
+   Rec601YCbCrColorspace,
+   Rec709YCbCrColorspace,
+   RGBColorspace,           // Linear RGB colorspace */
+   scRGBColorspace,         // ??? */
+   sRGBColorspace,          // Default: non-linear sRGB colorspace */
+   TransparentColorspace,
+   xyYColorspace,
+   XYZColorspace,           // IEEE Color Reference colorspace */
+   YCbCrColorspace,
+   YCCColorspace,
+   YDbDrColorspace,
+   YIQColorspace,
+   YPbPrColorspace,
+   YUVColorspace,
+   LinearGRAYColorspace,     // Single Channel greyscale (linear) image */
+   JzazbzColorspace,
+   DisplayP3Colorspace,
+   Adobe98Colorspace,
+   ProPhotoColorspace
+  );
 
   PColorspaceType = ^ColorspaceType;
 
 type
  CompositeOperator = (
-  UndefinedCompositeOp,
-  NoCompositeOp,
-  AddCompositeOp,
-  AtopCompositeOp,
-  BlendCompositeOp,
-  BumpmapCompositeOp,
-  ClearCompositeOp,
-  ColorBurnCompositeOp,
-  ColorDodgeCompositeOp,
-  ColorizeCompositeOp,
-  CopyBlackCompositeOp,
-  CopyBlueCompositeOp,
-  CopyCompositeOp,
-  CopyCyanCompositeOp,
-  CopyGreenCompositeOp,
-  CopyMagentaCompositeOp,
-  CopyOpacityCompositeOp,
-  CopyRedCompositeOp,
-  CopyYellowCompositeOp,
-  DarkenCompositeOp,
-  DstAtopCompositeOp,
-  DstCompositeOp,
-  DstInCompositeOp,
-  DstOutCompositeOp,
-  DstOverCompositeOp,
-  DifferenceCompositeOp,
-  DisplaceCompositeOp,
-  DissolveCompositeOp,
-  ExclusionCompositeOp,
-  HardLightCompositeOp,
-  HueCompositeOp,
-  InCompositeOp,
-  LightenCompositeOp,
-  LuminizeCompositeOp,
-  MinusCompositeOp,
-  ModulateCompositeOp,
-  MultiplyCompositeOp,
-  OutCompositeOp,
-  OverCompositeOp,
-  OverlayCompositeOp,
-  PlusCompositeOp,
-  ReplaceCompositeOp,
-  SaturateCompositeOp,
-  ScreenCompositeOp,
-  SoftLightCompositeOp,
-  SrcAtopCompositeOp,
-  SrcCompositeOp,
-  SrcInCompositeOp,
-  SrcOutCompositeOp,
-  SrcOverCompositeOp,
-  SubtractCompositeOp,
-  ThresholdCompositeOp,
-  XorCompositeOp
+   UndefinedCompositeOp,
+   AlphaCompositeOp,
+   AtopCompositeOp,
+   BlendCompositeOp,
+   BlurCompositeOp,
+   BumpmapCompositeOp,
+   ChangeMaskCompositeOp,
+   ClearCompositeOp,
+   ColorBurnCompositeOp,
+   ColorDodgeCompositeOp,
+   ColorizeCompositeOp,
+   CopyBlackCompositeOp,
+   CopyBlueCompositeOp,
+   CopyCompositeOp,
+   CopyCyanCompositeOp,
+   CopyGreenCompositeOp,
+   CopyMagentaCompositeOp,
+   CopyAlphaCompositeOp,
+   CopyRedCompositeOp,
+   CopyYellowCompositeOp,
+   DarkenCompositeOp,
+   DarkenIntensityCompositeOp,
+   DifferenceCompositeOp,
+   DisplaceCompositeOp,
+   DissolveCompositeOp,
+   DistortCompositeOp,
+   DivideDstCompositeOp,
+   DivideSrcCompositeOp,
+   DstAtopCompositeOp,
+   DstCompositeOp,
+   DstInCompositeOp,
+   DstOutCompositeOp,
+   DstOverCompositeOp,
+   ExclusionCompositeOp,
+   HardLightCompositeOp,
+   HardMixCompositeOp,
+   HueCompositeOp,
+   InCompositeOp,
+   IntensityCompositeOp,
+   LightenCompositeOp,
+   LightenIntensityCompositeOp,
+   LinearBurnCompositeOp,
+   LinearDodgeCompositeOp,
+   LinearLightCompositeOp,
+   LuminizeCompositeOp,
+   MathematicsCompositeOp,
+   MinusDstCompositeOp,
+   MinusSrcCompositeOp,
+   ModulateCompositeOp,
+   ModulusAddCompositeOp,
+   ModulusSubtractCompositeOp,
+   MultiplyCompositeOp,
+   NoCompositeOp,
+   OutCompositeOp,
+   OverCompositeOp,
+   OverlayCompositeOp,
+   PegtopLightCompositeOp,
+   PinLightCompositeOp,
+   PlusCompositeOp,
+   ReplaceCompositeOp,
+   SaturateCompositeOp,
+   ScreenCompositeOp,
+   SoftLightCompositeOp,
+   SrcAtopCompositeOp,
+   SrcCompositeOp,
+   SrcInCompositeOp,
+   SrcOutCompositeOp,
+   SrcOverCompositeOp,
+   ThresholdCompositeOp,
+   VividLightCompositeOp,
+   XorCompositeOp,
+   StereoCompositeOp,
+   FreezeCompositeOp,
+   InterpolateCompositeOp,
+   NegateCompositeOp,
+   ReflectCompositeOp,
+   SoftBurnCompositeOp,
+   SoftDodgeCompositeOp,
+   StampCompositeOp,
+   RMSECompositeOp
  );
 
   PCompositeOperator = ^CompositeOperator;
@@ -179,28 +224,33 @@ type
 type
   // Verified with imagemagick 6.7.7-10
   CompressionType = (
-    UndefinedCompression,
-    NoCompression,
-    BZipCompression,
-    DXT1Compression,
-    DXT3Compression,
-    DXT5Compression,
-    FaxCompression,           {* CCITT Group 3 compression *}
-    Group4Compression,        {* CCITT Group 4 compression (also used in faxes) *}
-    JPEGCompression,
-    JPEG2000Compression,      {* ISO/IEC std 15444-1 *}
-    LosslessJPEGCompression,
-    LZWCompression,
-    RLECompression,
-    ZipCompression,
-    ZipSCompression,
-    PizCompression,
-    Pxr24Compression,
-    B44Compression,
-    B44ACompression,
-    LZMACompression,          {* Lempel-Ziv-Markov chain algorithm *}
-    JBIG1Compression,         {* ISO/IEC std 11544 / ITU-T rec T.82 *}
-    JBIG2Compression          {* ISO/IEC std 14492 / ITU-T rec T.88 *}
+   UndefinedCompression,
+   B44ACompression,
+   B44Compression,
+   BZipCompression,
+   DXT1Compression,
+   DXT3Compression,
+   DXT5Compression,
+   FaxCompression,
+   Group4Compression,
+   JBIG1Compression,        // ISO/IEC std 11544 / ITU-T rec T.82 */
+   JBIG2Compression,        // ISO/IEC std 14492 / ITU-T rec T.88 */
+   JPEG2000Compression,     // ISO/IEC std 15444-1 */
+   JPEGCompression,
+   LosslessJPEGCompression,
+   LZMACompression,         // Lempel-Ziv-Markov chain algorithm */
+   LZWCompression,
+   NoCompression,
+   PizCompression,
+   Pxr24Compression,
+   RLECompression,
+   ZipCompression,
+   ZipSCompression,
+   ZstdCompression,
+   WebPCompression,
+   DWAACompression,
+   DWABCompression,
+   BC7Compression
   );
 
   PCompressionType = ^CompressionType;
@@ -295,13 +345,13 @@ type
   PExceptionType = ^ExceptionType;
 
 type
- FilterTypes = (
+ FilterType = (
   UndefinedFilter,
   PointFilter,
   BoxFilter,
   TriangleFilter,
   HermiteFilter,
-  HanningFilter,
+  HannFilter,
   HammingFilter,
   BlackmanFilter,
   GaussianFilter,
@@ -309,12 +359,29 @@ type
   CubicFilter,
   CatromFilter,
   MitchellFilter,
+  JincFilter,
+  SincFilter,
+  SincFastFilter,
+  KaiserFilter,
+  WelchFilter,
+  ParzenFilter,
+  BohmanFilter,
+  BartlettFilter,
+  LagrangeFilter,
   LanczosFilter,
-  BesselFilter,
-  SincFilter
+  LanczosSharpFilter,
+  Lanczos2Filter,
+  Lanczos2SharpFilter,
+  RobidouxFilter,
+  RobidouxSharpFilter,
+  CosineFilter,
+  SplineFilter,
+  LanczosRadiusFilter,
+  CubicSplineFilter,
+  SentinelFilter  // a count of all the filters, not a real filter */
  );
 
-  PFilterTypes = ^FilterTypes;
+  PFilterType = ^FilterType;
 
 const
   UndefinedGravity = 0;
@@ -339,14 +406,15 @@ type ImageType = (
   UndefinedType,
   BilevelType,
   GrayscaleType,
-  GrayscaleMatteType,
+  GrayscaleAlphaType,
   PaletteType,
-  PaletteMatteType,
+  PaletteAlphaType,
   TrueColorType,
-  TrueColorMatteType,
+  TrueColorAlphaType,
   ColorSeparationType,
-  ColorSeparationMatteType,
-  OptimizeType
+  ColorSeparationAlphaType,
+  OptimizeType,
+  PaletteBilevelAlphaType
  );
 
   PImageType = ^ImageType;
@@ -357,7 +425,10 @@ type
   NoInterlace,
   LineInterlace,
   PlaneInterlace,
-  PartitionInterlace
+  PartitionInterlace,
+  GIFInterlace,
+  JPEGInterlace,
+  PNGInterlace
  );
 
   PInterlaceType = ^InterlaceType;
@@ -451,9 +522,9 @@ type
 type
   PixelPacket = record
 {$ifdef WORDS_BIGENDIAN}
-   red, green, blue, opacity: Quantum;
+   red, green, blue, alpha, black: Quantum;
 {$else}
-   blue, green, red, opacity: Quantum;
+   blue, green, red, alpha, black: Quantum;
 {$endif}
   end;
   
@@ -480,10 +551,6 @@ type
 
 type 
   ProfileInfo = record
-   name: PAnsiChar;
-   length: cint;
-   info: PAnsiChar;
-   signature: culong;
   end;
   
   PProfileInfo = ^ProfileInfo;
@@ -522,38 +589,137 @@ type
 
 type
   ExceptionInfo = record
-   //severity: ExceptionType;
-   //error_number: Shortint;
-   severity: culong;
-   error_number: culong;
+   severity: ExceptionType;
+   error_number: Shortint;
+   //severity: culong;
+   //error_number: culong;
    reason, description: PAnsiChar;
 	 exceptions: Pointer;
 	 relinquish: MagickBooleanType;
    semaphore: Pointer; //PSemaphoreInfo;
    signature: culong;
   end;
-  
+
   PExceptionInfo = ^ExceptionInfo;
 
 //typedef struct _Ascii85Info _Ascii85Info_;
 
 //typedef struct _BlobInfo _BlobInfo_;
+type
+  PointInfo = record
+    x, y: double;
+  end;
+
+  PPointInfo = ^PointInfo;
+
+const MaxPixelChannels = 32;
+
+type
+  PixelChannel = (
+  UndefinedPixelChannel = 0,
+  RedPixelChannel = 0,
+  CyanPixelChannel = 0,
+  GrayPixelChannel = 0,
+  LPixelChannel = 0,
+  LabelPixelChannel = 0,
+  YPixelChannel = 0,
+  aPixelChannel = 1,
+  GreenPixelChannel = 1,
+  MagentaPixelChannel = 1,
+  CbPixelChannel = 1,
+  bPixelChannel = 2,
+  BluePixelChannel = 2,
+  YellowPixelChannel = 2,
+  CrPixelChannel = 2,
+  BlackPixelChannel = 3,
+  AlphaPixelChannel = 4,
+  IndexPixelChannel = 5,
+  ReadMaskPixelChannel = 6,
+  WriteMaskPixelChannel = 7,
+  MetaPixelChannel = 8,
+  CompositeMaskPixelChannel = 9,
+  IntensityPixelChannel = MaxPixelChannels,  // ???? */
+  CompositePixelChannel = MaxPixelChannels,  // ???? */
+  SyncPixelChannel = MaxPixelChannels+1      // not a real channel */
+  );
+
+type
+  PixelTrait = (
+    UndefinedPixelTrait = $000000,
+    CopyPixelTrait = $000001,
+    UpdatePixelTrait = $000002,
+    BlendPixelTrait = $000004
+  );
+
+type
+  PixelChannelMap = record
+    channel: PixelChannel;
+    traits: PixelTrait;
+    offset: cint;
+
+  end;
+  PPixelChannelMap = ^PixelChannelMap;
+
+type
+  PixelIntensityMethod = (
+    UndefinedPixelIntensityMethod = 0,
+    AveragePixelIntensityMethod,
+    BrightnessPixelIntensityMethod,
+    LightnessPixelIntensityMethod,
+    MSPixelIntensityMethod,
+    Rec601LumaPixelIntensityMethod,
+    Rec601LuminancePixelIntensityMethod,
+    Rec709LumaPixelIntensityMethod,
+    Rec709LuminancePixelIntensityMethod,
+    RMSPixelIntensityMethod
+    );
+
+type
+  PixelInterpolateMethod = (
+    UndefinedInterpolatePixel,
+    AverageInterpolatePixel,    // Average 4 nearest neighbours */
+    Average9InterpolatePixel,   // Average 9 nearest neighbours */
+    Average16InterpolatePixel,  // Average 16 nearest neighbours */
+    BackgroundInterpolatePixel, // Just return background color */
+    BilinearInterpolatePixel,   // Triangular filter interpolation */
+    BlendInterpolatePixel,      // blend of nearest 1, 2 or 4 pixels */
+    CatromInterpolatePixel,     // Catmull-Rom interpolation */
+    IntegerInterpolatePixel,    // Integer (floor) interpolation */
+    MeshInterpolatePixel,       // Triangular Mesh interpolation */
+    NearestInterpolatePixel,    // Nearest Neighbour Only */
+    SplineInterpolatePixel      // Cubic Spline (blurred) interpolation */
+  );
+
 
 type
   MagickProgressMonitor = function (const str: PAnsiChar; const para: MagickOffsetType;
    const sizetype: MagickSizeType; param: Pointer): PMagickBooleanType;
 
 type
+  PixelInfo = record
+    storage_class: ClassType;
+    colorspace: ColorspaceType;
+    alpha_trait: PixelTrait;
+    fuzz: double;
+    depth: culong;
+    count: MagickSizeType;
+    red, green, blue, black, alpha, index: MagickRealType;
+end;
+
+type
+  PImageInfo = ^ImageInfo;
+  PImage = ^Image;
+
   Image = record
    storage_class: ClassType;
    colorspace: ColorspaceType;
    compression: CompressionType;
    quality: culong;
    orientation: OrientationType;
-   taint, matte: MagickBooleanType;
+   taint: MagickBooleanType;
    columns, rows, depth, colors: culong;
    colormap: PPixelPacket;
-   background_color, border_color, matte_color: PixelPacket;
+   alpha_coloer, background_color, border_color, transparent_color: PixelPacket;
    gamma: double;
    chromaticity: ChromaticityInfo;
    rendering_intent: RenderingIntent;
@@ -561,51 +727,58 @@ type
    units: ResolutionType;
    montage, directory, geometry: PAnsiChar;
    offset: cint;
-   x_resolution, y_resolution: double;
-   page, extract_info, tile_info: RectangleInfo;  // deprecated
-   bias, blur, fuzz: double;
-   filter: FilterTypes;
+   //x_resolution, y_resolution: double;
+   resolution: PointInfo;
+   page, extract_info: RectangleInfo;  // deprecated
+   fuzz: double;
+   filter: FilterType;
+   intensity: PixelIntensityMethod;
    interlace: InterlaceType;
    endian: EndianType;
    gravity: GravityType;
    compose: CompositeOperator;
    dispose: DisposeType;
-   clip_mask: Pointer; // PImage
-   scene, delay, ticks_per_second, iterations, total_colors: culong;
+   scene, delay, duration: culong;
+   ticks_per_second: cint;
+   iterations, total_colors: culong;
    start_loop: cint;
+   interpolate: PixelInterpolateMethod;
+   black_point_compensation: MagickBooleanType;
+   tile_offset: RectangleInfo;
+   type_: ImageType;
+   dither: MagickBooleanType;
+   extent: MagickSizeType;
+   ping: MagickBooleanType;
+   read_mask, write_mask: MagickBooleanType;
+   alpha_trait: PixelTrait;
+   number_channels, number_meta_channels, metacontent_extent: culong;
+   channel_mask: ChannelType;
+   channel_map: PPixelChannelMap;
+   cache: Pointer;
    error: ErrorInfo;
    timer: TimerInfo;
    progress_monitor: MagickProgressMonitor;
    client_data: Pointer;
-   cache: Pointer;
-   attributes: Pointer;
    ascii85: Pointer; //_Ascii85Info_
-   blob: Pointer; // _BlobInfo_
+   generic_profile: PProfileInfo;
+   properties, artifacts: Pointer;
    filename, magick_filename, magick: array[1..MaxTextExtent] of char;
    magick_columns, magick_rows: culong;
-   exception: ExceptionInfo;
+   blob: Pointer; // _BlobInfo_
+   timestamp: culong; // ???
    debug: MagickBooleanType;
    reference_count: Longint;
    semaphore: Pointer; //PSemaphoreInfo;
-   color_profile, iptc_profile: ProfileInfo;
-   generic_profile: PProfileInfo;
-   generic_profiles: culong;  // this & ProfileInfo is deprecated
+   image_info: PImageInfo;
+   list, previous, next: PImage;
    signature: culong;
-   previous, list, next: Pointer;
-{  struct _Image
-    *previous,
-    *list,
-    *next;}
- end;
- 
- PImage = ^Image;
+   matte_color: PixelInfo;
+   composite_mask: MagickBooleanType;
+   mask_trait: PixelTrait;
+   channels: ChannelType;
+  end;
 
-//type
-//  size_t = PStreamHandler(procedure (const image: PImage;
-//   const param: Pointer; const) );
-
-type
-  ImageInfo = record
+ ImageInfo = record
    compression: CompressionType;
    orientation: OrientationType;
    temporary, adjoin, affirm, antialias: MagickBooleanType;
@@ -617,36 +790,38 @@ type
    quality: culong;
    sampling_factor, server_name, font, texture, density: PAnsiChar;
    pointsize, fuzz: double;
-   background_color, border_color, matte_color: PixelPacket;
+   alpha_color, background_color, border_color, transparent_color: PixelInfo;
    dither, monochrome: MagickBooleanType;
-   colors: culong;
+//   colors: culong;
    colorspace: ColorspaceType;
+   compose: CompositeOperator;
    type_: ImageType ;
-   preview_type: PreviewType;
-   group: Longint;
+//   preview_type: PreviewType;
+//   group: Longint;
    ping, verbose: MagickBooleanType;
-   view, authenticate: PAnsiChar;
+//   view, authenticate: PAnsiChar;
    channel: ChannelType;
-   attributes: PImage;
+//   attributes: PImage;
    options: Pointer;
+   profile: Pointer;
+   synchronize: MagickBooleanType;
    progress_monitor: MagickProgressMonitor;
    client_data, cache: Pointer;
    stream: culong; //StreamHandler;
    file_: Pointer; // *file
    blob: Pointer;
    length: cint;
-   magick, unique, zero, filename: array[1..MaxTextExtent] of char;
+   magick, unique, filename: array[1..MaxTextExtent] of char;
    debug: MagickBooleanType;
-
-  {
-    Deprecated.
-  }
-   tile: PAnsiChar;
-   subimage, subrange: culong;
-   pen: PixelPacket;
    signature: culong;
+   custom_stream: Pointer; // *CustomStreamInfo
+   matte_color: PixelInfo;
  end;
 
-  PImageInfo = ^ImageInfo;
+
+//type
+//  size_t = PStreamHandler(procedure (const image: PImage;
+//   const param: Pointer; const) );
+
 
 
