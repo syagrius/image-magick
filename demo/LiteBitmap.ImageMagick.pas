@@ -42,7 +42,7 @@ type
     constructor Create(const ABytes: TBytes; ASrcRect: TRect); override;
     destructor Destroy; override;
     class procedure FinalizeLibrary;
-    procedure Resize(AWidth, AHeight: Integer; AAlgorithm: TipScaleAlgorithm);
+    procedure Resize(AWidth, AHeight: Integer; AAlgorithm: TipScaleAlgorithm; const ExtentWidth, ExtentHeight : Integer; Gravity: GravityType;  ExtentColor:AnsiString);
     function ToBytes(AFormat: TipImageFormat; AQuality: Byte = 0): TBytes;
     class function TryInitializeLibrary: Boolean;
   end;
@@ -56,8 +56,7 @@ uses
 
 { TipImageMagickLiteBitmap }
 
-procedure TipImageMagickLiteBitmap.CheckMagick(AStatus: MagickBooleanType;
-  const AMethodName: string);
+procedure TipImageMagickLiteBitmap.CheckMagick(AStatus: MagickBooleanType;  const AMethodName: string);
 var
   LSeverity: ExceptionType;
   LDescriptionPAnsiChar: PAnsiChar;
@@ -128,13 +127,18 @@ begin
     Result := 0;
 end;
 
-procedure TipImageMagickLiteBitmap.Resize(AWidth, AHeight: Integer;
-  AAlgorithm: TipScaleAlgorithm);
+procedure TipImageMagickLiteBitmap.Resize(AWidth, AHeight: Integer;  AAlgorithm: TipScaleAlgorithm; const ExtentWidth, ExtentHeight : Integer; Gravity: GravityType;  ExtentColor:AnsiString);
+var
+  PW1 : PPixelWand;
+  NH, NW : Integer;
 begin
   if Assigned(FMagickWand) then
   begin
+    PW1:= NewPixelWand();
+
     // The image magick support different algorithms that isn't in TipScaleAlgorithm,
     // then we will consider always the "TipScaleAlgorithm.Lanczos", because it is one of the best
+
     case AAlgorithm of
       TipScaleAlgorithm.FastBilinear:    CheckMagick(MagickResizeImage(FMagickWand, AWidth, AHeight, LanczosFilter, 1.0), 'TipImageMagickLiteBitmap.Resize');
       TipScaleAlgorithm.Bilinear:        CheckMagick(MagickResizeImage(FMagickWand, AWidth, AHeight, LanczosFilter, 1.0), 'TipImageMagickLiteBitmap.Resize');
@@ -144,6 +148,65 @@ begin
     else
       raise EipImageMagickLiteBitmap.CreateFmt('[TipImageMagickLiteBitmap.Resize] Unknown TipScaleAlgorithm(%d)', [Ord(AAlgorithm)]);
     end;
+
+    PixelSetColor(PW1, PAnsiChar(ExtentColor));
+    MagickSetImageBackgroundColor(FMagickWand, PW1);
+    // MagickSetImageGravity(FMagickWand, SouthEastGravity); // does not work
+
+//    MagickSetImageGravity(FMagickWand, CenterGravity);
+    //CheckMagick(MagickSetImageExtent(FMagickWand, 1000, 1200), 'TipImageMagickLiteBitmap.Extend'); // Ok but no PixelWand, no Gravity
+    // https://stackoverflow.com/questions/43471168/magicksetimagegravity-is-not-working
+(*    case True of
+
+    end;
+*)
+    case Gravity of
+      UndefinedGravity, NorthWestGravity:
+        begin
+          NH:=0;
+          NW:=0;
+        end;
+      SouthWestGravity:
+      begin
+         NW:=0;
+         NH:=Height - ExtentHeight;
+      end;
+      SouthEastGravity:
+      begin
+        NW:=Width - ExtentWidth;
+        NH:=Height - ExtentHeight;
+      end;
+      EastGravity:
+      begin
+        NW:=Width - ExtentWidth;
+        NH:=(Height - ExtentHeight) div 2;
+      end;
+
+      NorthGravity:
+      begin
+
+      end;
+      NorthEastGravity:
+      begin
+
+      end;
+      WestGravity:
+      begin
+
+      end;
+      CenterGravity:
+      begin
+
+      end;
+      SouthGravity:
+      begin
+
+      end;
+    end;
+    MagickExtentImage(FMagickWand, ExtentWidth, ExtentHeight, NW, NH);
+
+    DestroyPixelWand(PW1);
+
   end;
 end;
 

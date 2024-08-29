@@ -3,17 +3,16 @@ unit LiteBitmap;
 interface
 
 {$SCOPEDENUMS ON}
-
 uses
   { Delphi }
   System.SysUtils,
-  System.Types;
+  System.Types, ImageMagick;
+
 
 type
   TipLiteBitmapClass = class of TipLiteBitmap;
   TipImageFormat     = (Gif = 0, Bmp, Png, Tiff, Jpg);
   TipScaleAlgorithm  = (FastBilinear = 0, Bilinear, Bicubic, NearestNeighbor, Lanczos);
-
 
   { IipLiteBitmap }
 
@@ -22,7 +21,7 @@ type
     function GetHeight: Integer;
     function GetWidth: Integer;
     function IsEmpty: Boolean;
-    procedure Resize(AWidth, AHeight: Integer; AAlgorithm: TipScaleAlgorithm);
+    procedure Resize(AWidth, AHeight: Integer; AAlgorithm: TipScaleAlgorithm; const ExtentWidth, Extentdeight : Integer; Gravity: GravityType;  ExtentColor:AnsiString);
     function ToBytes(AFormat: TipImageFormat; AQuality: Byte = 0): TBytes;
     property Height: Integer read GetHeight;
     property Width: Integer read GetWidth;

@@ -352,6 +352,8 @@ begin
       MagickRotateImage := GetProcAddress(FModule, 'MagickRotateImage');
       MagickRollImage := GetProcAddress(FModule, 'MagickRollImage');
       MagickResizeImage := GetProcAddress(FModule, 'MagickResizeImage');
+      MagickSetImageGravity := GetProcAddress(FModule, 'MagickSetImageGravity');
+      MagickExtentImage := GetProcAddress(FModule, 'MagickExtentImage');
       MagickResampleImage := GetProcAddress(FModule, 'MagickResampleImage');
       MagickRemoveImage := GetProcAddress(FModule, 'MagickRemoveImage');
       MagickReduceNoiseImage := GetProcAddress(FModule, 'MagickReduceNoiseImage');

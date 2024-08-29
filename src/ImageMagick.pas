@@ -35,7 +35,7 @@ uses
   { Delphi }
   System.SysUtils,
 
-  ccInfinity.Console,
+  //ccInfinity.Console,
 
   { ImageMagick }
   ImageMagick.CTypes;

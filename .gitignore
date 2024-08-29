@@ -80,3 +80,4 @@ tmp*.tmp
 !**/redist/**
 !**/resources/**
 !lib/install_paths.exe
+/demo/photos/output_image.png
