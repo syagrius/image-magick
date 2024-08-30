@@ -15,8 +15,10 @@ type
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure GravityComboChange(Sender: TObject);
   private
     { Private declarations }
+    procedure RedrawFromGui;
   public
     { Public declarations }
   end;
@@ -34,22 +36,9 @@ uses
 {$R *.fmx}
 
 procedure TForm1.Button1Click(Sender: TObject);
-var
-  LLiteBitmap: IipLiteBitmap;
-  Ratio:Double;
 begin
-  LLiteBitmap := TipImageMagickLiteBitmap.Create(TFile.ReadAllBytes('.\photos\piclumen-1724960425471.png'));
-  //LLiteBitmap := TipImageMagickLiteBitmap.Create(TFile.ReadAllBytes('.\photos\piclumen-1724960425471.png'), TRect.Create(372, 159, 612, 399));
-
-  Ratio := LLiteBitmap.Width / LLiteBitmap.Height;
-  LLiteBitmap.Resize(Round(800 * Ratio), 800, TipScaleAlgorithm.Lanczos,1000,900, EastGravity, 'yellow');
-
-  TFile.WriteAllBytes('.\photos\output_image.png', LLiteBitmap.ToBytes(TipImageFormat.Jpg, 90));
-  //Showmessage(Format('Saved "%s"!', [TPath.GetFullPath('..\..\..\output_image.png')]));
-
-  Image1.Bitmap.LoadFromFile(TPath.GetFullPath('.\photos\output_image.png'));
+  RedrawFromGui;
 end;
-
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   // Is necessary to load/unload the dll manually. The dll load is dynamic/manual
@@ -65,6 +54,28 @@ begin
   // to avoid delphi attempt to load the dll, for exmple, when you make a
   // package that is using the image magick and install it
   TipImageMagickLiteBitmap.FinalizeLibrary;
+end;
+
+procedure TForm1.GravityComboChange(Sender: TObject);
+begin
+  RedrawFromGui;
+end;
+
+procedure TForm1.RedrawFromGui;
+var
+  LLiteBitmap: IipLiteBitmap;
+  Ratio:Double;
+begin
+  LLiteBitmap := TipImageMagickLiteBitmap.Create(TFile.ReadAllBytes('..\..\..\photos\piclumen-1724960425471.png'));
+  //LLiteBitmap := TipImageMagickLiteBitmap.Create(TFile.ReadAllBytes('.\photos\piclumen-1724960425471.png'), TRect.Create(372, 159, 612, 399));
+
+  Ratio := LLiteBitmap.Width / LLiteBitmap.Height;
+  LLiteBitmap.Resize(Round(800 * Ratio), 800, TipScaleAlgorithm.Lanczos,1000,900, GravityType(GravityCombo.ItemIndex), 'yellow');
+
+  TFile.WriteAllBytes('..\..\..\photos\output_image.png', LLiteBitmap.ToBytes(TipImageFormat.Jpg, 90));
+  //Showmessage(Format('Saved "%s"!', [TPath.GetFullPath('..\..\..\output_image.png')]));
+
+  Image1.Bitmap.LoadFromFile(TPath.GetFullPath('..\..\..\photos\output_image.png'));
 end;
 
 end.

@@ -156,10 +156,6 @@ begin
 //    MagickSetImageGravity(FMagickWand, CenterGravity);
     //CheckMagick(MagickSetImageExtent(FMagickWand, 1000, 1200), 'TipImageMagickLiteBitmap.Extend'); // Ok but no PixelWand, no Gravity
     // https://stackoverflow.com/questions/43471168/magicksetimagegravity-is-not-working
-(*    case True of
-
-    end;
-*)
     case Gravity of
       UndefinedGravity, NorthWestGravity:
         begin
@@ -184,26 +180,32 @@ begin
 
       NorthGravity:
       begin
-
+        NW:=(Width - ExtentWidth) div 2;
+        NH:=0;
       end;
       NorthEastGravity:
       begin
-
+        NW:=Width - ExtentWidth;
+        NH:=0;
       end;
       WestGravity:
       begin
-
+        NW:=0;
+        NH:=(Height - ExtentHeight) div 2;
       end;
       CenterGravity:
       begin
-
+        NW:=(Width - ExtentWidth) div 2;
+        NH:=(Height - ExtentHeight) div 2;
       end;
       SouthGravity:
       begin
+        NW:=(Width - ExtentWidth) div 2;
+        NH:=(Height - ExtentHeight);
 
       end;
     end;
-    MagickExtentImage(FMagickWand, ExtentWidth, ExtentHeight, NW, NH);
+    CheckMagick(MagickExtentImage(FMagickWand, ExtentWidth, ExtentHeight, NW, NH),'MagickExtentImage');
 
     DestroyPixelWand(PW1);
 
@@ -233,7 +235,7 @@ end;
 
 class function TipImageMagickLiteBitmap.TryInitializeLibrary: Boolean;
 begin
-  Result := TryInitializeImageMagick;
+  Result := TryInitializeImageMagick('C:\Program Files (x86)\ImageMagick-7.1.1-Q16\');
 end;
 
 

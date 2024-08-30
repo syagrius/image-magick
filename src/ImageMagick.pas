@@ -133,7 +133,7 @@ const
 #include "magick/version.h"
 #include "magick/xwindow.h"}
 
-function TryInitializeImageMagick: Boolean;
+function TryInitializeImageMagick(const DllPath: string ='') : Boolean;
 procedure FinalizeImageMagick;
 
 var
@@ -156,18 +156,26 @@ var
   FLock    : TCriticalSection;
 
 // ----------------------------------------------------------------------------------
-function TryInitializeImageMagick: Boolean;
+function TryInitializeImageMagick(const DllPath:string=''): Boolean;
+var
+   Dll:string;
 begin
   FLock.Acquire;
+  if DllPath<>'' then
+    Dll := IncludeTrailingBackslash(DllPath)+MagickExport
+  else
+    Dll:=DllPath+MagickExport;
+
   try
     if not GInitializedImageMagick then
     begin
-      FModule := LoadLibrary(PChar(MagickExport));
+      FModule := LoadLibrary(PChar(Dll));
       Result := FModule <> 0;
       if Result then
       begin
+
         GetAuthenticPixels := GetProcAddress(FModule, 'GetAuthenticPixels');
-        Result := TryInitializeImageMagickWand;
+        Result := TryInitializeImageMagickWand(Dll);
         GInitializedImageMagick := True;
       end;
     end

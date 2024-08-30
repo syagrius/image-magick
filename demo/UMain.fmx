@@ -33,11 +33,24 @@ object Form1: TForm1
     Size.PlatformDefault = False
   end
   object GravityCombo: TComboBox
-    Position.X = 115.000000000000000000
+    Items.Strings = (
+      '0: None'
+      '1: North-West  '
+      '2: North  '
+      '3: North-East  '
+      '4: West  '
+      '5: Center  '
+      '6: East  '
+      '7: South-West  '
+      '8: South  '
+      '9: South-East')
+    ItemIndex = 1
+    Position.X = 107.000000000000000000
     Position.Y = 27.000000000000000000
     Size.Width = 137.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 3
+    OnChange = GravityComboChange
   end
 end

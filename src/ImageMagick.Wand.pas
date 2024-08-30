@@ -79,7 +79,7 @@ var
   MagickSetFirstIterator: procedure(wand: PMagickWand); cdecl;
   MagickSetLastIterator: procedure(wand: PMagickWand); cdecl;
 
-function TryInitializeImageMagickWand: Boolean;
+function TryInitializeImageMagickWand(const DllPath : string=''): Boolean;
 procedure FinalizeImageMagickWand;
 
 var
@@ -100,7 +100,7 @@ uses
 var
   FModule: HMODULE;
 
-function TryInitializeImageMagickWand: Boolean;
+function TryInitializeImageMagickWand(const DllPath : string=''): Boolean;
 begin
   if not GInitializedImageMagick then
   begin
